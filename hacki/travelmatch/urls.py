@@ -1,8 +1,12 @@
 from django.urls import path
 
+from django.conf.urls import url
+
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='index'),
-#    path('', views.login, name='login'),
+    url(r'^$', views.index),
+    url(r'^login', views.login),
+    url(r'^where', views.where),
+    url(r'^who', views.who)
 ]
