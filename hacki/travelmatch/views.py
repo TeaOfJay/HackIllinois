@@ -15,6 +15,9 @@ def where(request):
 def who(request):
     return render(request, appname + 'who.html')
 
+def myfunction(request):
+    return render(request, appname + 'who.html')
+
 # Create your views here.
 
 

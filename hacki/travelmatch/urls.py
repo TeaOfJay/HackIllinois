@@ -8,5 +8,5 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^login', views.login),
     url(r'^where', views.where),
-    url(r'^who', views.who)
+    url(r'^who', views.who, name='who')
 ]
