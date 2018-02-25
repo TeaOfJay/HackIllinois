@@ -1,0 +1,44 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'travelmatch/where.css' %}" />
+<html>
+    <head>
+        <title>TravelMatch</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row-fluid">
+                <!-- Generated code via framework-->
+                {% for flight in flights%}
+                    <div class="rounded">
+                        <h4>{{flights.airline}}</h4> <!-- type of airline -->
+                        <p> {{flights.price}}</p>
+                        <!-- other types of data-->
+                    </div>
+                {% endfor %}
+                <script>
+                    function renderMarker(location) {
+                        var map = new google.maps.Map(document.getElementsById('map'), {
+                            zoom   : 4,
+                            center : location
+                        });
+                        var marker = new google.maps.Marker({
+                            position : location,
+                            map      : map
+                        })
+                    }
+
+                    function renderMarkers(locations) {
+                        for location in locations:
+                            renderMarker(location)
+                    }
+                </script>
+                <div class="span8">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>if you hav
+    </body>
+</html>
