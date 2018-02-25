@@ -12,10 +12,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import include, url
 from django.contrib import admin
-from django.urls import include, path
+
+from travelmatch.views import index
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('travelmatch/', include('travelmatch.urls')),
+    url(r'^travelmatch/', include('travelmatch.urls')),
+    url(r'^admin/', include(admin.site.urls)),
 ]

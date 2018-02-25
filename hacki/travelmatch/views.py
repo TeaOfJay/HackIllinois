@@ -15,8 +15,11 @@ def login(request):
 
 def where(request):
     return render(request, appname + 'where.html')
+def wplans(request):
+    return render(request, appname + 'wplans.html')
 
 def who(request):
+
     return render(request, appname + 'who.html')
 
 def unauthorized(request):
