@@ -21,26 +21,17 @@ Config = configparser.ConfigParser()
 Config.read(r'C:\config.ini')
 
 def index(request):
-<<<<<<< HEAD
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
-=======
-    # if 'TOKEN' not in request.COOKIES:
-    #     return HttpResponseRedirect("/travelmatch/unauthorized")
->>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
     return render(request, appname + 'index.html')
 
 def login(request):
     return render(request, appname + 'login.html')
 
 def where(request):
-<<<<<<< HEAD
+
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
-    return render(request, appname + 'where.html')
-=======
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
     lat = 42.407467
     lon = -71.276749
 
@@ -63,12 +54,13 @@ def where(request):
         flights.append(flightInfo)
     print(flights)
     return render(request, appname + 'where.html', {"flights": flights})
->>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
+
 def wplans(request):
     return render(request, appname + 'wplans.html')
 
 def who(request):
-<<<<<<< HEAD
+
+
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
     webtoken = jwt.decode(request.COOKIES['TOKEN'], 'secret', algorithms=['HS256'])
@@ -76,17 +68,12 @@ def who(request):
     query = User_Data.objects.filter(user_id=webtoken.userid)
     if (len(query) == 1):
         print(query)
-    return render(request, appname + 'who.html',{"user_data":mydata})
-=======
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
     # webtoken = jwt.decode(request.COOKIES['TOKEN'], 'secret', algorithms=['HS256'])
     # print(webtoken)
     # query = User_Data.objects.filter(user_id=webtoken.userid)
     # if (len(query) == 1):
     #     print(query)
     return render(request, appname + 'who.html', { "user_data": User_Data.objects.all() })
->>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
 
 def unauthorized(request):
     return render(request, appname + 'unauthorized.json')
