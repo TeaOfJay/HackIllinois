@@ -25,7 +25,7 @@ SECRET_KEY = 'p7lyr%d6^cdwsrc%u&d&^lc&jba#p6z*22avkf7dfg&%e4srh6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -71,9 +71,53 @@ TEMPLATES = [
 WSGI_APPLICATION = 'hacki.wsgi.application'
 
 
+
+
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+# Check to see if MySQLdb is available; if not, have pymysql masquerade as
+# MySQLdb. This is a convenience feature for developers who cannot install
+# MySQLdb locally; when running in production on Google App Engine Standard
+# Environment, MySQLdb will be used.
+try:
+    import MySQLdb  # noqa: F401
+except ImportError:
+    import pymysql
+    pymysql.install_as_MySQLdb()
 
+# [START db_setup]
+if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/travelmatch-196222:us-central1:travelmatch-sql',
+            'NAME': 'travelmatch',
+            'USER': 'admin',
+            'PASSWORD': '',
+    }
+}
+else:
+    # Running locally so connect to either a local MySQL instance or connect to
+    # Cloud SQL via the proxy. To start the proxy via command line:
+    #
+    #     $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306
+    #
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'travelmatch',
+            'USER': 'admin',
+            'PASSWORD': '',
+    }
+}
+# [END db_setup]
+
+''' DEFAULT CODE BEFORE ADDING GOOGLE CLOUD
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -99,7 +143,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
+END DEFAULT CODE BEFORE ADDING GOOGLE CLOUD '''
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -118,4 +162,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+
+STATICFILES_DIR = [
+    os.path.join(BASE_DIR, "static"),
+]
