@@ -16,29 +16,29 @@ Config = configparser.ConfigParser()
 Config.read(r'C:\config.ini')
 
 def index(request):
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
+    #if 'TOKEN' not in request.COOKIES:
+    #    return HttpResponseRedirect("/travelmatch/unauthorized")
     return render(request, appname + 'index.html')
 
 def login(request):
     return render(request, appname + 'login.html')
 
 def where(request):
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
+    #if 'TOKEN' not in request.COOKIES:
+    #    return HttpResponseRedirect("/travelmatch/unauthorized")
     return render(request, appname + 'where.html')
 def wplans(request):
     return render(request, appname + 'wplans.html')
 
 def who(request):
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
+    #if 'TOKEN' not in request.COOKIES:
+    #    return HttpResponseRedirect("/travelmatch/unauthorized")
     webtoken = jwt.decode(request.COOKIES['TOKEN'], 'secret', algorithms=['HS256'])
     print(webtoken)
     query = User_Data.objects.filter(user_id=webtoken.userid)
     if (len(query) == 1):
         print(query)
-    return render(request, appname + 'who.html')
+    return render(request, appname + 'who.html',{"user_data":mydata})
 
 def unauthorized(request):
     return render(request, appname + 'unauthorized.json')
