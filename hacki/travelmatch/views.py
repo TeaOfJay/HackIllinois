@@ -21,8 +21,8 @@ Config = configparser.ConfigParser()
 Config.read(r'C:\config.ini')
 
 def index(request):
-    if 'TOKEN' not in request.COOKIES:
-        return HttpResponseRedirect("/travelmatch/unauthorized")
+    # if 'TOKEN' not in request.COOKIES:
+    #     return HttpResponseRedirect("/travelmatch/unauthorized")
     return render(request, appname + 'index.html')
 
 def login(request):
