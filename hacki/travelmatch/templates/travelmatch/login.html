@@ -1,9 +1,11 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'travelmatch/login.css' %}" />
 <html>
     <head>
         <title>Login</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     </head>
     <body>
         <!--Pulling Awesome Font -->
@@ -20,7 +22,7 @@
                     </br>
                     <div class="wrapper">
                     <span class="group-btn">     
-                        <a href="{%url 'who' %}" class="btn btn-primary btn-md">login </a>
+                        <a class="btn btn-primary btn-md">login </a>
                     </span>
                     <a target="_blank" 
                         class="btn btn-info pull-right" 

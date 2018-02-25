@@ -1,0 +1,11 @@
+
+
+#background-intro {
+    
+    background      : #eb01a5;
+    background-image: url('/static/travelmatch/city.jpg');
+    background-image: url("/static/travelmatch/city.jpg"),linear-gradient(to bottom, #eb01a5,transparent);/* linear-gradient(#eb01a5, #000000));*/
+    background-image: ;
+    height: 500px;
+    background-size : cover;
+}
