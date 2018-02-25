@@ -49,8 +49,3 @@ def loginRedirect(request):
     return HttpResponseRedirect("https://www.facebook.com/v2.12/dialog/oauth?client_id=586126661725961&redirect_uri=https://b84c3ce6.ngrok.io/travelmatch/_callback&state=/&scope=user_likes")
 
 # Create your views here.
-
-
-
-
-
