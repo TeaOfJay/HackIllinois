@@ -8,6 +8,11 @@ from datetime import timedelta, date
 from .models import User_Data
 import jwt
 import os
+import urllib.request
+import requests
+import sys
+import re
+import ast
 
 dir = os.path.dirname(__file__)
 
@@ -16,21 +21,54 @@ Config = configparser.ConfigParser()
 Config.read(r'C:\config.ini')
 
 def index(request):
+<<<<<<< HEAD
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
+=======
+    # if 'TOKEN' not in request.COOKIES:
+    #     return HttpResponseRedirect("/travelmatch/unauthorized")
+>>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
     return render(request, appname + 'index.html')
 
 def login(request):
     return render(request, appname + 'login.html')
 
 def where(request):
+<<<<<<< HEAD
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
     return render(request, appname + 'where.html')
+=======
+    if 'TOKEN' not in request.COOKIES:
+        return HttpResponseRedirect("/travelmatch/unauthorized")
+    lat = 42.407467
+    lon = -71.276749
+
+    lat = str(lat)
+    lon = str(lon)
+
+    link = 'https://api.sandbox.amadeus.com/v1.2/airports/nearest-relevant?apikey=YOY6pU9JGlYtaMjIzylgt92t00ROtFle&latitude=' + lat + '&longitude=' + lon
+
+    response = requests.get(link, verify=True)
+    response = response.content.decode("utf-8")
+    response = ast.literal_eval(response)
+
+    flights = []
+    print()
+    for i in range(0, len(response)):
+        flightInfo = {}
+        flightInfo['airport_name'] = response[i]['airport_name']
+        flightInfo['city_name'] = response[i]['city_name']
+        flightInfo['distance'] = response[i]['distance']
+        flights.append(flightInfo)
+    print(flights)
+    return render(request, appname + 'where.html', {"flights": flights})
+>>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
 def wplans(request):
     return render(request, appname + 'wplans.html')
 
 def who(request):
+<<<<<<< HEAD
     #if 'TOKEN' not in request.COOKIES:
     #    return HttpResponseRedirect("/travelmatch/unauthorized")
     webtoken = jwt.decode(request.COOKIES['TOKEN'], 'secret', algorithms=['HS256'])
@@ -39,6 +77,16 @@ def who(request):
     if (len(query) == 1):
         print(query)
     return render(request, appname + 'who.html',{"user_data":mydata})
+=======
+    if 'TOKEN' not in request.COOKIES:
+        return HttpResponseRedirect("/travelmatch/unauthorized")
+    # webtoken = jwt.decode(request.COOKIES['TOKEN'], 'secret', algorithms=['HS256'])
+    # print(webtoken)
+    # query = User_Data.objects.filter(user_id=webtoken.userid)
+    # if (len(query) == 1):
+    #     print(query)
+    return render(request, appname + 'who.html', { "user_data": User_Data.objects.all() })
+>>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
 
 def unauthorized(request):
     return render(request, appname + 'unauthorized.json')
@@ -47,7 +95,7 @@ def callback(request):
     # Exchange code for access token
     params = {
         'client_id': Config['Keys']['ClientId'],
-        'redirect_uri': 'https://743a17e3.ngrok.io/travelmatch/_callback',
+        'redirect_uri': 'https://94c4a246.ngrok.io/travelmatch/_callback',
         'client_secret': Config['Keys']['ClientSecret'],
         'code': request.GET.get('code','')
     }
@@ -63,7 +111,7 @@ def callback(request):
 
         facebookId = r.json()['data']['user_id']
         userQuery = User_Data.objects.filter(user_id=r.json()['data']['user_id'])
-        response = HttpResponseRedirect("/travelmatch/who")
+        response = HttpResponseRedirect("/travelmatch/wplans")
         
         if (len(userQuery) == 0):
             # Create entry for new user (if not already existant)
@@ -95,4 +143,4 @@ def callback(request):
 
 def loginRedirect(request):
     # Redirect to OAuth provider
-    return HttpResponseRedirect("https://www.facebook.com/v2.12/dialog/oauth?client_id=586126661725961&redirect_uri=https://743a17e3.ngrok.io/travelmatch/_callback&state=/&scope=user_likes,email")
+    return HttpResponseRedirect("https://www.facebook.com/v2.12/dialog/oauth?client_id=586126661725961&redirect_uri=https://94c4a246.ngrok.io/travelmatch/_callback&state=/&scope=user_likes")

@@ -19,5 +19,9 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^travelmatch/', include('travelmatch.urls')),
+<<<<<<< HEAD
     url(r'admin/', admin.site.urls),
+=======
+    url(r'^admin/', admin.site.urls),
+>>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
 ]

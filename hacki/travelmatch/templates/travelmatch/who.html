@@ -1,6 +1,23 @@
 <html>
+<<<<<<< HEAD
     <head></head>
     <body></body>
 
 
+=======
+    <body>
+        <ul>
+            {% for user in user_data %}
+                <li>
+                    <ul>
+                        <li>{{user.name}}</li>
+                        <li><img src="{{user.image_url}}"></li>
+                        <li>{{user.likes}}</li>
+                    </ul>
+                </li>
+
+            {% endfor %}
+        </ul>
+    </body>
+>>>>>>> a44e84a1e5588d0c4ac742afc03a39d385790712
 </html>
