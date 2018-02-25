@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^_callback', views.callback),
     url(r'^unauthorized', views.unauthorized),
     url(r'^facebook_login', views.loginRedirect, name='loginRedirect')
+
 ]
