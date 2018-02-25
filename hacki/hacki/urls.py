@@ -19,5 +19,5 @@ from travelmatch.views import index
 
 urlpatterns = [
     url(r'^travelmatch/', include('travelmatch.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls)
 ]

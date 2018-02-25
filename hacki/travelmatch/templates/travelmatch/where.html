@@ -13,8 +13,9 @@
                 <!-- Generated code via framework-->
                 {% for flight in flights%}
                     <div class="rounded">
-                        <h4>{{flights.airline}}</h4> <!-- type of airline -->
-                        <p> {{flights.price}}</p>
+                        <h4>{{flight.airport_name}}</h4> <!-- type of airline -->
+                        <p> {{flight.city_name}}</p>
+                        <p> {{flight.distance}}</p>
                         <!-- other types of data-->
                     </div>
                 {% endfor %}
